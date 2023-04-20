@@ -6,8 +6,8 @@ wget https://digipa.it/wp-content/uploads/opc.tar.gz
 tar -xzvf opc.tar.gz
 chmod +x pctrain pcclassify
 
-# Step 2: Get the list of all point cloud file paths in the datasets repository
-DATASET_FILES=$(find . -type f -iname "*.laz" -o -iname "*.las" -o -iname "*.ply")
+# Step 2: Get the list of all point cloud file paths in the datasets repository excluding the ground-truth folder
+DATASET_FILES=$(find . -type f -iname "*.laz" -o -iname "*.las" -o -iname "*.ply" | grep -v "ground-truth")
 
 echo "Dataset Files: $DATASET_FILES"
 

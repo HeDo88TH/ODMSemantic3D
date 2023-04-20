@@ -30,6 +30,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y --fix-missing --no-install-recommends \
+            libtbb2 \
+            libboost-iostreams1.74.0 \
+            libboost-system1.74.0 \
+            libboost-serialization1.74.0 \
+            libpdal-base13 \
+            libgomp1
       - name: Run classification workflow
         run: |
           bash evaluation/run.sh

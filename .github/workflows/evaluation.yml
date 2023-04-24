@@ -18,7 +18,7 @@ jobs:
 
       - name: Debug commits
         run: |
-          git log -n 15
+          git log -n 10
 
       - name: Check if last commit was by GitHub Actions
         id: check

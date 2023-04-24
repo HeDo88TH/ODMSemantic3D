@@ -16,14 +16,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug commits
-        run: |
-          git log -n 10
-
       - name: Check if last commit was by GitHub Actions
         id: check
         run: |
-          LAST_COMMIT_AUTHOR=$(git log --format="%an" -n 1)
+          LAST_COMMIT_AUTHOR=$(git log --format="%an" -n 1 --no-merges)
           echo "Last commit author: $LAST_COMMIT_AUTHOR"
           if [[ "$LAST_COMMIT_AUTHOR" == "GitHub Actions" ]]; then
             echo "skip=true" >> $GITHUB_ENV

@@ -20,6 +20,7 @@ jobs:
         id: check
         run: |
           LAST_COMMIT_AUTHOR=$(git log --format="%an" -n 1)
+          echo "Last commit author: $LAST_COMMIT_AUTHOR"
           if [[ "$LAST_COMMIT_AUTHOR" == "GitHub Actions" ]]; then
             echo "skip=true" >> $GITHUB_ENV
           else
@@ -28,7 +29,7 @@ jobs:
 
   classification:
     needs: check_commit_author
-    if: needs.check_commit_author.outputs.skip != 'true'
+    if: ${{ needs.check_commit_author.outputs.skip != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout datasets repository

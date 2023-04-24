@@ -14,12 +14,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
+
+      - name: Debug commits
+        run: |
+          git log -n 15
 
       - name: Check if last commit was by GitHub Actions
         id: check
         run: |
-          git log -n 15
           LAST_COMMIT_AUTHOR=$(git log --format="%an" -n 1)
           echo "Last commit author: $LAST_COMMIT_AUTHOR"
           if [[ "$LAST_COMMIT_AUTHOR" == "GitHub Actions" ]]; then

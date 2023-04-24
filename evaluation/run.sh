@@ -70,7 +70,7 @@ curl -s -S -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application
 
 # Step 12: Add new-model.bin to the PR
 git config --global user.email "github-action@example.com"
-git config --global user.name "GitHub Action"
+git config --global user.name "GitHub Actions"
 git add new-model.bin
 git commit -m "Add new-model.bin"
 git push origin HEAD:$GITHUB_HEAD_REF

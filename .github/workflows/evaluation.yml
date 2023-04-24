@@ -22,9 +22,9 @@ jobs:
           LAST_COMMIT_AUTHOR=$(git log --format="%an" -n 1 --no-merges)
           echo "Last commit author: $LAST_COMMIT_AUTHOR"
           if [[ "$LAST_COMMIT_AUTHOR" == "GitHub Actions" ]]; then
-            echo "skip=true" >> $GITHUB_ENV
+            echo "skip=true" >> $GITHUB_OUTPUT
           else
-            echo "skip=false" >> $GITHUB_ENV
+            echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
   classification:

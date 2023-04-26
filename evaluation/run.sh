@@ -76,7 +76,7 @@ REQ_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comme
 
 echo "Request URL: $REQ_URL"
 
-curl -s -S -H "Authorization: Bearer $GITHUB_TOKEN" \
+curl -s -S -H "Authorization: Bearer $GROUND_TRUTH_REPO_TOKEN" \
            -H "Content-Type: application/json" \
            -H "X-GitHub-Api-Version: 2022-11-28" \
            -H "Accept: application/vnd.github+json" \

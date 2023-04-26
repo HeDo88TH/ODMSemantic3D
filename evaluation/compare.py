@@ -108,9 +108,16 @@ def main(filenames):
         baseline_data = read_json_file(baseline_filename)
         target_data = read_json_file(target_filename)
 
+        # get last folder name of baseline_filename
+        baseline_folder_name = baseline_filename.split("/")[-2]
+
+        # get last folder name of target_filename
+        target_folder_name = target_filename.split("/")[-2]
+
         comparison = compare(baseline_data, target_data)
-        print("\nComparison for {} vs {}: (Differences)".format(baseline_filename, target_filename))
+        print("\n<details><summary>Comparison for {} vs {}: (Differences)</summary>".format(baseline_folder_name, target_folder_name))
         print_table(baseline_data, target_data, comparison)
+        print("</details>")
 
         if baseline_data_sum is None:
             baseline_data_sum = baseline_data

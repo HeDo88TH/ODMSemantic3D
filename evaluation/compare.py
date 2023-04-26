@@ -53,14 +53,14 @@ def print_table(baseline_data, target_data, data):
             td = target_data["labels"][label]
 
             print(" |                      | {:>10} | {:>10} | {:>10} | {:>10} |".format(
-                safe_format(bd["accuracy"]), safe_format(bd["recall"]), safe_format(bd["precision"]), safe_format(bd["f1"])))
+                safe_format(bd["accuracy"]), safe_format(bd["recall"]), safe_format(bd["precision"]), safe_format(bd["f1"], "{:.2f}")))
             print(" | {:20} | {:>10} | {:>10} | {:>10} | {:>10} |".format(
-                label, safe_format(td["accuracy"]), safe_format(td["recall"]), safe_format(td["precision"]), safe_format(td["f1"])))
+                label, safe_format(td["accuracy"]), safe_format(td["recall"]), safe_format(td["precision"]), safe_format(td["f1"], "{:.2f}")))
             print(" |                      | {:>10} | {:>10} | {:>10} | {:>10} |".format(
                 safe_format(d["accuracy"]), safe_format(d["recall"]), safe_format(d["precision"]), safe_format(d["f1"])))
         else:
             print(" | {:20} | {:>10%} | {:>10} | {:>10} | {:>10} |".format(
-                label, safe_format(d["accuracy"]), safe_format(d["recall"]), safe_format(d["precision"]), safe_format(d["f1"])))
+                label, safe_format(d["accuracy"]), safe_format(d["recall"]), safe_format(d["precision"]), safe_format(d["f1"], "{:.2f}")))
 
         print(" |                      |            |            |            |            |")
 

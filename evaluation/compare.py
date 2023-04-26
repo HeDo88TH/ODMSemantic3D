@@ -11,10 +11,18 @@ def sum_data(data_sum, data):
     data_sum["accuracy"] += data["accuracy"]
     for label in data["labels"]:
         if label in data_sum["labels"]:
-            data_sum["labels"][label]["accuracy"] += data["labels"][label]["accuracy"]
-            data_sum["labels"][label]["recall"] += data["labels"][label]["recall"]
-            data_sum["labels"][label]["precision"] += data["labels"][label]["precision"]
-            data_sum["labels"][label]["f1"] += data["labels"][label]["f1"]
+
+            if data["labels"][label]["accuracy"] is not None:
+                data_sum["labels"][label]["accuracy"] += data["labels"][label]["accuracy"]
+
+            if data["labels"][label]["recall"] is not None:
+                data_sum["labels"][label]["recall"] += data["labels"][label]["recall"]
+
+            if data["labels"][label]["precision"] is not None:
+                data_sum["labels"][label]["precision"] += data["labels"][label]["precision"]
+
+            if data["labels"][label]["f1"] is not None:
+                data_sum["labels"][label]["f1"] += data["labels"][label]["f1"]
         else:
             data_sum["labels"][label] = data["labels"][label]
 

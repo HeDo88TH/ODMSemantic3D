@@ -72,7 +72,15 @@ COMMENT_PAYLOAD=$(echo '{}' | jq --arg body "$PR_COMMENT" '.body = $body')
 
 echo "Comment Payload: $COMMENT_PAYLOAD"
 
-curl -s -S -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: application/json" --data "$COMMENT_PAYLOAD" "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments"
+REQ_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments"
+
+echo "Request URL: $REQ_URL"
+
+curl -s -S -H "Authorization: Bearer $GITHUB_TOKEN" \
+           -H "Content-Type: application/json" \
+           -H "X-GitHub-Api-Version: 2022-11-28" \
+           -H "Accept: application/vnd.github+json" \
+           --data "$COMMENT_PAYLOAD" "$REQ_URL"
 
 # Step 12: Add new-model.bin to the PR
 git config --global user.email "noreply@github.com"

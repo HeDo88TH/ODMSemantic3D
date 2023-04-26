@@ -56,7 +56,14 @@ def compare(baseline, target):
 
     for label in labels:
         if label in baseline["labels"] and label in target["labels"]:
-            comparison["labels"][label] = {key: (target["labels"][label][key] - baseline["labels"][label][key]) / baseline["labels"][label][key]
+
+            tgs = target["labels"][label]
+            bgs = baseline["labels"][label]
+
+            comparison["labels"][label] = {key: (tgs[key] - bgs[key]) / bgs[key]
+                                                if bgs[key] != 0 and
+                                                   tgs[key] is not None and
+                                                   bgs[key] is not None else None
                                            for key in ["accuracy", "recall", "precision", "f1"]}
         else:
             comparison["labels"][label] = {key: None

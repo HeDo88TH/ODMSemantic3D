@@ -26,6 +26,9 @@ def avg_data(data_sum, n):
         data_sum["labels"][label]["precision"] /= n
         data_sum["labels"][label]["f1"] /= n
 
+def safe_format(value, format_string="{:.2%}"):
+    return format_string.format(value) if value is not None else "N/A"
+
 def print_table(baseline_data, target_data, data):
 
     print("\n  Accuracy: {:.2%} vs {:.2%}".format(baseline_data["accuracy"], target_data["accuracy"]))
@@ -34,18 +37,26 @@ def print_table(baseline_data, target_data, data):
 
     all_labels = set(baseline_data["labels"].keys()) | set(target_data["labels"].keys())
     for label in all_labels:
+
+        d = data["labels"][label]
+
         if label in baseline_data["labels"] and label in target_data["labels"]:
-            print("                       | {:10.2%} | {:10.2%} | {:10.2%} | {:10.2%} |".format(
-                baseline_data["labels"][label]["accuracy"], baseline_data["labels"][label]["recall"], baseline_data["labels"][label]["precision"], baseline_data["labels"][label]["f1"]))
-            print("  {:20} | {:10.2%} | {:10.2%} | {:10.2%} | {:10.2%} |".format(
-                label, target_data["labels"][label]["accuracy"], target_data["labels"][label]["recall"], target_data["labels"][label]["precision"], target_data["labels"][label]["f1"]))
-            print("                       | {:10.2%} | {:10.2%} | {:10.2%} | {:10.2%} |".format(
-                data["labels"][label]["accuracy"], data["labels"][label]["recall"], data["labels"][label]["precision"], data["labels"][label]["f1"]))
+
+            bd = baseline_data["labels"][label]
+            td = target_data["labels"][label]
+
+            print("                       | {:>10} | {:>10} | {:>10} | {:>10} |".format(
+                safe_format(bd["accuracy"]), safe_format(bd["recall"]), safe_format(bd["precision"]), safe_format(bd["f1"])))
+            print("  {:20} | {:>10} | {:>10} | {:>10} | {:>10} |".format(
+                label, safe_format(td["accuracy"]), safe_format(td["recall"]), safe_format(td["precision"]), safe_format(td["f1"])))
+            print("                       | {:>10} | {:>10} | {:>10} | {:>10} |".format(
+                safe_format(d["accuracy"]), safe_format(d["recall"]), safe_format(d["precision"]), safe_format(d["f1"])))
         else:
-            print("  {:20} | {:10.2%} | {:10.2%} | {:10.2%} | {:10.2%} |".format(
-                label, data["labels"][label]["accuracy"], data["labels"][label]["recall"], data["labels"][label]["precision"], data["labels"][label]["f1"]))
+            print("  {:20} | {:>10%} | {:>10} | {:>10} | {:>10} |".format(
+                label, safe_format(d["accuracy"]), safe_format(d["recall"]), safe_format(d["precision"]), safe_format(d["f1"])))
 
         print("                       |            |            |            |            |")
+
 
 def compare(baseline, target):
     comparison = {

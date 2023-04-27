@@ -9,7 +9,6 @@ on:
       - main
 
 jobs:
-
   classification:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'

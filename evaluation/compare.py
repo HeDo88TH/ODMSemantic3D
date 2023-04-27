@@ -115,7 +115,7 @@ def main(filenames):
         target_folder_name = target_filename.split("/")[-2]
 
         comparison = compare(baseline_data, target_data)
-        print("\n<details><summary>Comparison for {} vs {}: (Differences)</summary>".format(baseline_folder_name, target_folder_name))
+        print("\n<details><summary>Comparison for {} (Differences)</summary>\n".format(baseline_folder_name))
         print_table(baseline_data, target_data, comparison)
         print("</details>")
 
@@ -135,7 +135,7 @@ def main(filenames):
     avg_data(target_data_sum, pairs_cnt)
     avg_data(comparison_sum, pairs_cnt)
 
-    print("\nAverage comparison for {} pairs:".format(pairs_cnt))
+    print("\n**Average ({} datasets)**".format(pairs_cnt))
     print_table(baseline_data_sum, target_data_sum, comparison_sum)
 
 if __name__ == "__main__":
